@@ -1,5 +1,7 @@
 package main
 
+// use siddontang go-mysql commit 535abe8f2eba8d1edaf1fecacea288ebb3b479ad
+
 import (
 	"github.com/qjpcpu/binlog-canal/config"
 	"github.com/qjpcpu/binlog-canal/sync"

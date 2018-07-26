@@ -6,7 +6,6 @@ import (
 	"github.com/siddontang/go-mysql/mysql"
 	"github.com/siddontang/go-mysql/replication"
 	"github.com/siddontang/go-mysql/schema"
-	"github.com/siddontang/go/hack"
 )
 
 type posSaver struct {
@@ -78,7 +77,7 @@ func (h *eventHandler) OnRow(e *canal.RowsEvent) error {
 			for i, row := range e.Rows {
 				if index < len(row) {
 					if t, ok := e.Rows[i][index].([]byte); ok {
-						e.Rows[i][index] = hack.String(t)
+						e.Rows[i][index] = string(t)
 					}
 				}
 			}
