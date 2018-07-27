@@ -1,0 +1,189 @@
+{
+	"comment": "",
+	"ignore": "test",
+	"package": [
+		{
+			"checksumSHA1": "Pc2ORQp+VY3Un/dkh4QwLC7R6lE=",
+			"path": "github.com/BurntSushi/toml",
+			"revision": "a368813c5e648fee92e5f6c30e3944ff9d5e8895",
+			"revisionTime": "2017-06-26T11:06:00Z"
+		},
+		{
+			"checksumSHA1": "rdTivBqdcOd2Z5jJOiyOPZ/mfmw=",
+			"origin": "github.com/siddontang/go-mysql/vendor/github.com/juju/errors",
+			"path": "github.com/juju/errors",
+			"revision": "535abe8f2eba8d1edaf1fecacea288ebb3b479ad",
+			"revisionTime": "2018-07-25T02:44:49Z"
+		},
+		{
+			"checksumSHA1": "KGCifxxR5cm2gz94i2iha+RIZlk=",
+			"path": "github.com/mattn/go-runewidth",
+			"revision": "ce7b0b5c7b45a81508558cd1dba6bb1e4ddb51bb",
+			"revisionTime": "2018-04-08T05:53:51Z"
+		},
+		{
+			"checksumSHA1": "sZPoLYTMt3Bz8HNvSeA5TRSx3M8=",
+			"path": "github.com/olekukonko/tablewriter",
+			"revision": "d4647c9c7a84d847478d890b816b7d8b62b0b279",
+			"revisionTime": "2018-05-06T12:14:14Z"
+		},
+		{
+			"checksumSHA1": "8U5pEHFpXd1/Klgp+C/a6TqWoh8=",
+			"path": "github.com/philhofer/fwd",
+			"revision": "bb6d471dc95d4fe11e432687f8b70ff496cf3136",
+			"revisionTime": "2017-09-05T21:21:22Z"
+		},
+		{
+			"checksumSHA1": "gaiinz9yJdzKGI02R1+n1NzClPg=",
+			"path": "github.com/qjpcpu/binlog-canal/config",
+			"revision": "eba5dabd376f248c5126375a1d4bd1da56a5fa9c",
+			"revisionTime": "2018-07-27T02:22:12Z"
+		},
+		{
+			"checksumSHA1": "G4ZlkpdvhRrDuLnxVlvoShgIDbU=",
+			"path": "github.com/qjpcpu/binlog-canal/plugins/data-plugin",
+			"revision": "eba5dabd376f248c5126375a1d4bd1da56a5fa9c",
+			"revisionTime": "2018-07-27T02:22:12Z"
+		},
+		{
+			"checksumSHA1": "cnaWmeAMt+pBHJTPMCljXTIjFPk=",
+			"path": "github.com/qjpcpu/binlog-canal/plugins/position-plugin",
+			"revision": "eba5dabd376f248c5126375a1d4bd1da56a5fa9c",
+			"revisionTime": "2018-07-27T02:22:12Z"
+		},
+		{
+			"checksumSHA1": "lqyy9uW7PCuNwl/fTvSbHLvmdBY=",
+			"path": "github.com/qjpcpu/binlog-canal/protocol",
+			"revision": "eba5dabd376f248c5126375a1d4bd1da56a5fa9c",
+			"revisionTime": "2018-07-27T02:22:12Z"
+		},
+		{
+			"checksumSHA1": "JJHaH8gtzyhHBX3XRltckreAqKc=",
+			"path": "github.com/qjpcpu/binlog-canal/sync",
+			"revision": "eba5dabd376f248c5126375a1d4bd1da56a5fa9c",
+			"revisionTime": "2018-07-27T02:22:12Z"
+		},
+		{
+			"checksumSHA1": "2Uay6kaWgNMJ1ernaXPWfGvKpIU=",
+			"path": "github.com/qjpcpu/binlog-canal/utils",
+			"revision": "eba5dabd376f248c5126375a1d4bd1da56a5fa9c",
+			"revisionTime": "2018-07-27T02:22:12Z"
+		},
+		{
+			"checksumSHA1": "/stb6FRXnlElhcP1hq8XIZwYpI4=",
+			"path": "github.com/qjpcpu/log",
+			"revision": "50575d429a68d522b1baa9de120367be4a5c28aa",
+			"revisionTime": "2018-05-02T02:42:59Z"
+		},
+		{
+			"checksumSHA1": "n3HFY5b9KUMmAuvLws6P79rostw=",
+			"path": "github.com/qjpcpu/log/logging",
+			"revision": "50575d429a68d522b1baa9de120367be4a5c28aa",
+			"revisionTime": "2018-05-02T02:42:59Z"
+		},
+		{
+			"checksumSHA1": "RT1EWxdnME3K/uuU4gX0YLeBtlc=",
+			"origin": "github.com/siddontang/go-mysql/vendor/github.com/satori/go.uuid",
+			"path": "github.com/satori/go.uuid",
+			"revision": "535abe8f2eba8d1edaf1fecacea288ebb3b479ad",
+			"revisionTime": "2018-07-25T02:44:49Z"
+		},
+		{
+			"checksumSHA1": "iPybhO29qpSR3sA35hs8RdJQeyg=",
+			"origin": "github.com/siddontang/go-mysql/vendor/github.com/shopspring/decimal",
+			"path": "github.com/shopspring/decimal",
+			"revision": "535abe8f2eba8d1edaf1fecacea288ebb3b479ad",
+			"revisionTime": "2018-07-25T02:44:49Z"
+		},
+		{
+			"checksumSHA1": "EsjqRcu8oArB4gn8b1G9kQZ/lIY=",
+			"path": "github.com/siddontang/go-mysql/canal",
+			"revision": "535abe8f2eba8d1edaf1fecacea288ebb3b479ad",
+			"revisionTime": "2018-07-25T02:44:49Z"
+		},
+		{
+			"checksumSHA1": "8XLT0aC4U9/OA7Ws9AHWdZ6+ruA=",
+			"path": "github.com/siddontang/go-mysql/client",
+			"revision": "535abe8f2eba8d1edaf1fecacea288ebb3b479ad",
+			"revisionTime": "2018-07-25T02:44:49Z"
+		},
+		{
+			"checksumSHA1": "4dLq1qg8DAGfusB1uhCAozdz2OQ=",
+			"path": "github.com/siddontang/go-mysql/dump",
+			"revision": "535abe8f2eba8d1edaf1fecacea288ebb3b479ad",
+			"revisionTime": "2018-07-25T02:44:49Z"
+		},
+		{
+			"checksumSHA1": "z9Zq4WJeUa+CIYjJfWFx4Zm/ADc=",
+			"path": "github.com/siddontang/go-mysql/mysql",
+			"revision": "535abe8f2eba8d1edaf1fecacea288ebb3b479ad",
+			"revisionTime": "2018-07-25T02:44:49Z"
+		},
+		{
+			"checksumSHA1": "n/oG8QPPwsvSAimc/gCSuh5GaOQ=",
+			"path": "github.com/siddontang/go-mysql/packet",
+			"revision": "535abe8f2eba8d1edaf1fecacea288ebb3b479ad",
+			"revisionTime": "2018-07-25T02:44:49Z"
+		},
+		{
+			"checksumSHA1": "F0SIkVjWRLQFzgfgcVPGl6w02gw=",
+			"path": "github.com/siddontang/go-mysql/replication",
+			"revision": "535abe8f2eba8d1edaf1fecacea288ebb3b479ad",
+			"revisionTime": "2018-07-25T02:44:49Z"
+		},
+		{
+			"checksumSHA1": "aiOD1EeWSvcXNCzkWdVhbyDxof4=",
+			"path": "github.com/siddontang/go-mysql/schema",
+			"revision": "535abe8f2eba8d1edaf1fecacea288ebb3b479ad",
+			"revisionTime": "2018-07-25T02:44:49Z"
+		},
+		{
+			"checksumSHA1": "hou29E6PZ7dEDFgXgM9P15cgHr4=",
+			"origin": "github.com/siddontang/go-mysql/vendor/github.com/siddontang/go/hack",
+			"path": "github.com/siddontang/go/hack",
+			"revision": "535abe8f2eba8d1edaf1fecacea288ebb3b479ad",
+			"revisionTime": "2018-07-25T02:44:49Z"
+		},
+		{
+			"checksumSHA1": "MfWqWj0xRPdk1DpXCN0EXyBCa4Q=",
+			"path": "github.com/tinylib/msgp/msgp",
+			"revision": "54a3260d60646faaba5873316fa01ac61d49c1d5",
+			"revisionTime": "2018-06-27T22:35:28Z"
+		},
+		{
+			"checksumSHA1": "GtamqiJoL7PGHsN454AoffBFMa8=",
+			"path": "golang.org/x/net/context",
+			"revision": "a680a1efc54dd51c040b3b5ce4939ea3cf2ea0d1",
+			"revisionTime": "2018-07-19T17:54:20Z"
+		},
+		{
+			"checksumSHA1": "nVR6NuI7YAnvjdQuBx/G3tD/dR0=",
+			"origin": "github.com/siddontang/go-mysql/vendor/gopkg.in/birkirb/loggers.v1",
+			"path": "gopkg.in/birkirb/loggers.v1",
+			"revision": "535abe8f2eba8d1edaf1fecacea288ebb3b479ad",
+			"revisionTime": "2018-07-25T02:44:49Z"
+		},
+		{
+			"checksumSHA1": "HQnbA1Lo1iXyP1IZQESUkXIvg60=",
+			"origin": "github.com/siddontang/go-mysql/vendor/gopkg.in/birkirb/loggers.v1/log",
+			"path": "gopkg.in/birkirb/loggers.v1/log",
+			"revision": "535abe8f2eba8d1edaf1fecacea288ebb3b479ad",
+			"revisionTime": "2018-07-25T02:44:49Z"
+		},
+		{
+			"checksumSHA1": "ati6XevqWYrtKCA+HnI2sqSXUE4=",
+			"origin": "github.com/siddontang/go-mysql/vendor/gopkg.in/birkirb/loggers.v1/mappers",
+			"path": "gopkg.in/birkirb/loggers.v1/mappers",
+			"revision": "535abe8f2eba8d1edaf1fecacea288ebb3b479ad",
+			"revisionTime": "2018-07-25T02:44:49Z"
+		},
+		{
+			"checksumSHA1": "guG+mqxkXe6co0rFq1KZczC/J0Y=",
+			"origin": "github.com/siddontang/go-mysql/vendor/gopkg.in/birkirb/loggers.v1/mappers/stdlib",
+			"path": "gopkg.in/birkirb/loggers.v1/mappers/stdlib",
+			"revision": "535abe8f2eba8d1edaf1fecacea288ebb3b479ad",
+			"revisionTime": "2018-07-25T02:44:49Z"
+		}
+	],
+	"rootPath": "github.com/qjpcpu/binlog-canal/cmd/printer"
+}
