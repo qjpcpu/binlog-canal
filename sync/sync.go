@@ -208,8 +208,8 @@ func (c *SyncClient) syncLoop() {
 					needSavePos = true
 				}
 			case protocol.EventData:
-				if err := c.plugins.Data.OnEventData(&v); err != nil {
-					log.Errorf("consumer event data fail:%v", err)
+				if err := c.triggerData(&v); err != nil {
+					log.Errorf("trigger data finally fail:%v", err)
 					return
 				}
 			default:
@@ -228,6 +228,32 @@ func (c *SyncClient) syncLoop() {
 
 			}
 			newPos = false
+		}
+	}
+}
+
+func (c *SyncClient) triggerData(evtData *protocol.EventData) error {
+	term := time.Second * 5
+	var max_retry = int64((1 * time.Hour) / term)
+	var err error
+	var cnt int64 = 1
+	if err = c.plugins.Data.OnEventData(evtData); err == nil {
+		return nil
+	}
+	for {
+		if cnt >= max_retry {
+			return fmt.Errorf("trigger event data fail:%s", err)
+		}
+		select {
+		case <-time.After(term):
+			cnt++
+			if err = c.plugins.Data.OnEventData(evtData); err != nil {
+				log.Errorf("consumer event data failed %v times:%v", cnt, err)
+			} else {
+				return nil
+			}
+		case <-c.ctx.Done():
+			return fmt.Errorf("SyncClient Done")
 		}
 	}
 }
