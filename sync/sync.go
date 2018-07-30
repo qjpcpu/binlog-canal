@@ -196,17 +196,13 @@ func (c *SyncClient) syncLoop() {
 		needSavePos = false
 		select {
 		case <-tick.C:
-			if newPos {
-				needSavePos = true
-			}
+			needSavePos = newPos
 		case v := <-c.syncCh:
 			switch v := v.(type) {
 			case posSaver:
 				newPos = true
 				pos = v.pos
-				if v.force {
-					needSavePos = true
-				}
+				needSavePos = v.force
 			case protocol.EventData:
 				if err := c.triggerData(&v); err != nil {
 					log.Errorf("trigger data finally fail:%v", err)

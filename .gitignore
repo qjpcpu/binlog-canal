@@ -1,3 +1,4 @@
 /cmd/printer/printer
+/cmd/printer/run_printer
 .nfs*
 .DS_Store
