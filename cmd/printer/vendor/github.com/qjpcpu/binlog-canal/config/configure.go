@@ -54,7 +54,27 @@ type Plugins struct {
 
 type ServerConfig struct {
 	SourceConfig SourceConfig
-	Plugins      Plugins
+}
+
+func New(mysqlConn string, db_name string, tables ...string) ServerConfig {
+	if len(tables) == 0 || db_name == "" || mysqlConn == "" {
+		panic("params error")
+	}
+	source := Source{
+		Schema: db_name,
+	}
+	for _, tbl := range tables {
+		source.Tables = append(source.Tables, TopicInfo{
+			Table: tbl,
+		})
+	}
+	return ServerConfig{
+		SourceConfig: SourceConfig{
+			MysqlConn: mysqlConn,
+			SyncAll:   false,
+			Sources:   []Source{source},
+		},
+	}
 }
 
 func PluginsOnlyForDebug() Plugins {

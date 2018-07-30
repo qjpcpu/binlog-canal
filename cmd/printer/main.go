@@ -33,22 +33,8 @@ func main() {
 		os.Exit(1)
 	}
 	fmt.Printf("will print %s.%s data change\n\n", db_name, table)
-	cfg := config.ServerConfig{
-		SourceConfig: config.SourceConfig{
-			MysqlConn: fmt.Sprintf("%s:%s@tcp(%s:%s)/?charset=utf8mb4&parseTime=true", user, pwd, host, port),
-			SyncAll:   false,
-			Sources: []config.Source{
-				{
-					Schema: db_name,
-					Tables: []config.TopicInfo{
-						{
-							Table: table,
-						},
-					},
-				},
-			},
-		},
-	}
+	mysqlConn := fmt.Sprintf("%s:%s@tcp(%s:%s)/?charset=utf8mb4&parseTime=true", user, pwd, host, port)
+	cfg := config.New(mysqlConn, db_name, table)
 	plugins := config.PluginsOnlyForDebug()
 	river, err := sync.NewSyncClient(&cfg, plugins)
 	if err != nil {
