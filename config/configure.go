@@ -77,6 +77,10 @@ func New(mysqlConn string, db_name string, tables ...string) ServerConfig {
 	}
 }
 
+func DefaultPlugins() Plugins {
+	return PluginsOnlyForDebug()
+}
+
 func PluginsOnlyForDebug() Plugins {
 	return Plugins{
 		Position: positionplugin.MemStore{},
