@@ -39,6 +39,7 @@ type SourceConfig struct {
 		Net     string
 		Addr    string
 		DSN     string
+		DB      string
 		Charset string
 	} `json:"-"`
 	//db and table list
@@ -56,9 +57,18 @@ type ServerConfig struct {
 	SourceConfig SourceConfig
 }
 
+// if db_name is empty, use database in mysqlconn string
 func New(mysqlConn string, db_name string, tables ...string) ServerConfig {
-	if len(tables) == 0 || db_name == "" || mysqlConn == "" {
+	if len(tables) == 0 || mysqlConn == "" {
 		panic("params error")
+	}
+	if db_name == "" {
+		sc := &SourceConfig{MysqlConn: mysqlConn}
+		sc.ParseDSN()
+		if sc.DBConfig.DB == "" {
+			panic("no db selected")
+		}
+		db_name = sc.DBConfig.DB
 	}
 	source := Source{
 		Schema: db_name,
@@ -125,8 +135,18 @@ func (cfg *SourceConfig) ParseDSN() error {
 			break
 		}
 		cfg.DBConfig.Addr = left[0:i]
-
+		i++
 		left = left[i:]
+		if left != "/" && strings.HasPrefix(left, "/") {
+			var j int
+			if j = strings.Index(left, "?"); j < 0 {
+				j = len(left)
+			}
+			if j > 1 {
+				cfg.DBConfig.DB = left[1:j]
+			}
+		}
+
 		if i = strings.Index(left, "?"); i >= 0 {
 			left = left[i+1:]
 			pairs := strings.Split(left, "&")
