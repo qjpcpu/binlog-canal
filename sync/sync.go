@@ -5,6 +5,7 @@ import (
 	"encoding/base64"
 	"fmt"
 	"github.com/qjpcpu/binlog-canal/config"
+	pg "github.com/qjpcpu/binlog-canal/plugins"
 	"github.com/qjpcpu/binlog-canal/plugins/data-plugin"
 	"github.com/qjpcpu/binlog-canal/plugins/position-plugin"
 	"github.com/qjpcpu/binlog-canal/protocol"
@@ -39,22 +40,22 @@ type SyncClient struct {
 	syncCh chan interface{}
 	sync.RWMutex
 	sourceLock sync.RWMutex
-	plugins    config.Plugins
+	plugins    *pg.Plugins
 }
 
-func NewSyncClient(cfg *config.ServerConfig, plugins config.Plugins) (*SyncClient, error) {
+func NewSyncClient(cfg *config.ServerConfig, plugins *pg.Plugins) (*SyncClient, error) {
 	c := new(SyncClient)
 	c.cfg = cfg
 	c.rules = make(map[string]*protocol.TopicInfo)
 	c.syncCh = make(chan interface{}, 4096)
 	c.plugins = plugins
-	if c.plugins.Position == nil {
+	if c.plugins.GetPositionStore() == nil {
 		fmt.Fprintln(os.Stderr, "No position plugin installed, use in memory plugin")
-		c.plugins.Position = positionplugin.MemStore{}
+		c.plugins.SetPositionStore(positionplugin.MemStore{})
 	}
-	if c.plugins.Data == nil {
+	if c.plugins.GetDataReceiver() == nil {
 		fmt.Fprintln(os.Stderr, "No data plugin installed, use stdout")
-		c.plugins.Data = dataplugin.Stdout{}
+		c.plugins.SetDataReceiver(dataplugin.Stdout{})
 	}
 	c.ctx, c.cancel = context.WithCancel(context.Background())
 
@@ -99,7 +100,7 @@ func (c *SyncClient) loadPositionInfo() error {
 	sql := fmt.Sprintf(`SHOW MASTER STATUS;`)
 	var err error
 	for loop := true; loop; loop = false {
-		c.master, err = NewMetaInfo(c.plugins.Position)
+		c.master, err = NewMetaInfo(c.plugins.GetPositionStore())
 		if err != nil {
 			log.Infof("Get NewMetaInfo with err:%+v, refresh from mysql server", err)
 			res := &mysql.Result{}
@@ -121,7 +122,7 @@ func (c *SyncClient) loadPositionInfo() error {
 			c.master = &MetaInfo{
 				Name:  pos.Name,
 				Pos:   pos.Pos,
-				store: c.plugins.Position,
+				store: c.plugins.GetPositionStore(),
 			}
 			c.master.Save(pos)
 		}
@@ -233,7 +234,7 @@ func (c *SyncClient) triggerData(evtData *protocol.EventData) error {
 	var max_retry = int64((1 * time.Hour) / term)
 	var err error
 	var cnt int64 = 1
-	if err = c.plugins.Data.OnEventData(evtData); err == nil {
+	if err = c.plugins.GetDataReceiver().OnEventData(evtData); err == nil {
 		return nil
 	}
 	for {
@@ -243,7 +244,7 @@ func (c *SyncClient) triggerData(evtData *protocol.EventData) error {
 		select {
 		case <-time.After(term):
 			cnt++
-			if err = c.plugins.Data.OnEventData(evtData); err != nil {
+			if err = c.plugins.GetDataReceiver().OnEventData(evtData); err != nil {
 				log.Errorf("consumer event data failed %v times:%v", cnt, err)
 			} else {
 				return nil

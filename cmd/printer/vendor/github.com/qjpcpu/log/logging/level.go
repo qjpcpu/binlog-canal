@@ -27,12 +27,12 @@ const (
 )
 
 var levelNames = []string{
-	"CRITICAL",
-	"ERROR",
-	"WARNING",
-	"NOTICE",
+	"CRIT",
+	"ERRO",
+	"WARN",
+	"NOTI",
 	"INFO",
-	"DEBUG",
+	"DEBU",
 }
 
 // String returns the string representation of a logging level.

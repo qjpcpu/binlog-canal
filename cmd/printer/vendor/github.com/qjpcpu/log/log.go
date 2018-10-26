@@ -1,10 +1,13 @@
 package log
 
 import (
+	"github.com/qjpcpu/filelog"
 	"github.com/qjpcpu/log/logging"
+	"io"
 	syslog "log"
 	"os"
 	"path/filepath"
+	"runtime/debug"
 	"strings"
 )
 
@@ -14,7 +17,10 @@ var setLogLevel func(Level)
 var log_option = defaultLogOption()
 
 const (
-	NormFormat = "%{level}: [%{time:2006-01-02 15:04:05.000}][gid:%{goroutineid}/gcnt:%{goroutinecount}][%{shortfile}][%{message}]"
+	NormFormat        = "%{level} %{time:2006-01-02 15:04:05.000} %{shortfile} %{message}"
+	DebugFormat       = "%{level} %{time:2006-01-02 15:04:05.000} gid:%{goroutineid}/gcnt:%{goroutinecount} %{shortfile} %{message}"
+	SimpleColorFormat = "\033[1;33m%{level}\033[0m \033[1;36m%{time:2006-01-02 15:04:05.000}\033[0m \033[0;34m%{shortfile}\033[0m \033[0;32m%{message}\033[0m"
+	CliFormat         = "\033[1;33m%{level}\033[0m \033[1;36m%{time:2006-01-02 15:04:05}\033[0m \033[0;32m%{message}\033[0m"
 )
 
 type Level int
@@ -53,18 +59,20 @@ func ParseLogLevel(lstr string) Level {
 }
 
 type LogOption struct {
-	LogFile    string
-	Level      Level
-	Format     string
-	RotateType logging.RotateType
-	files      []*logging.FileLogWriter
+	LogFile        string
+	Level          Level
+	Format         string
+	RotateType     filelog.RotateType
+	CreateShortcut bool
+	files          []io.WriteCloser
 }
 
 func defaultLogOption() LogOption {
 	return LogOption{
-		Level:      DEBUG,
-		Format:     NormFormat,
-		RotateType: logging.RotateDaily,
+		Level:          DEBUG,
+		Format:         SimpleColorFormat,
+		RotateType:     filelog.RotateDaily,
+		CreateShortcut: true,
 	}
 }
 
@@ -92,16 +100,22 @@ func InitLog(opt LogOption) {
 		// mkdir log dir
 		os.MkdirAll(filepath.Dir(opt.LogFile), 0777)
 		filename := opt.LogFile
-		info_log_fp, err := logging.NewFileLogWriter(filename, opt.RotateType)
+		info_log_fp, err := filelog.NewWriter(filename, func(fopt *filelog.Option) {
+			fopt.RotateType = opt.RotateType
+			fopt.CreateShortcut = opt.CreateShortcut
+		})
 		if err != nil {
 			syslog.Fatalf("open file[%s] failed[%s]", filename, err)
 		}
 
-		err_log_fp, err := logging.NewFileLogWriter(filename+".wf", opt.RotateType)
+		err_log_fp, err := filelog.NewWriter(filename+".wf", func(fopt *filelog.Option) {
+			fopt.RotateType = opt.RotateType
+			fopt.CreateShortcut = opt.CreateShortcut
+		})
 		if err != nil {
 			syslog.Fatalf("open file[%s.wf] failed[%s]", filename, err)
 		}
-		opt.files = []*logging.FileLogWriter{info_log_fp, err_log_fp}
+		opt.files = []io.WriteCloser{info_log_fp, err_log_fp}
 
 		backend_info := logging.NewLogBackend(info_log_fp, "", 0)
 		backend_err := logging.NewLogBackend(err_log_fp, "", 0)
@@ -135,6 +149,26 @@ func InitLog(opt LogOption) {
 	log_option = opt
 }
 
+func isformat(format string) bool {
+	end := len(format)
+	unfound := -2
+	var istag int = unfound
+	for i := 0; i < end; i++ {
+		if format[i] == '%' {
+			if istag == i-1 {
+				istag = unfound
+			} else {
+				istag = i
+			}
+		} else {
+			if istag == i-1 {
+				return true
+			}
+		}
+	}
+	return false
+}
+
 func Infof(format string, args ...interface{}) {
 	if lg == nil {
 		return
@@ -154,6 +188,13 @@ func Criticalf(format string, args ...interface{}) {
 		return
 	}
 	lg.Criticalf(format, args...)
+}
+
+func Fatalf(format string, args ...interface{}) {
+	if lg == nil {
+		return
+	}
+	lg.Fatalf(format, args...)
 }
 
 func Errorf(format string, args ...interface{}) {
@@ -177,6 +218,20 @@ func Noticef(format string, args ...interface{}) {
 	lg.Noticef(format, args...)
 }
 
+func isformatLog(args ...interface{}) bool {
+	for loop := true; loop; loop = false {
+		if len(args) <= 1 {
+			break
+		}
+		format, ok := args[0].(string)
+		if !ok {
+			break
+		}
+		return isformat(format)
+	}
+	return false
+}
+
 func Info(args ...interface{}) {
 	if lg == nil {
 		return
@@ -196,6 +251,13 @@ func Critical(args ...interface{}) {
 		return
 	}
 	lg.Criticalf(strings.TrimSpace(strings.Repeat("%+v ", len(args))), args...)
+}
+
+func Fatal(args ...interface{}) {
+	if lg == nil {
+		return
+	}
+	lg.Fatalf(strings.TrimSpace(strings.Repeat("%+v ", len(args))), args...)
 }
 
 func Error(args ...interface{}) {
@@ -219,6 +281,26 @@ func Notice(args ...interface{}) {
 	lg.Noticef(strings.TrimSpace(strings.Repeat("%+v ", len(args))), args...)
 }
 
+func MustNoErr(err error) {
+	if err != nil {
+		stack_info := debug.Stack()
+		start := 0
+		count := 0
+		for i, ch := range stack_info {
+			if ch == '\n' {
+				if count == 0 {
+					start = i
+				} else if count == 4 {
+					stack_info = append(stack_info[0:start+1], stack_info[i+1:]...)
+					break
+				}
+				count++
+			}
+		}
+		lg.Fatalf("%v\nMustNoErr fail, %s", err, stack_info)
+	}
+}
+
 func SetLogLevel(lvl Level) {
 	if setLogLevel != nil {
 		setLogLevel(lvl)
@@ -228,4 +310,12 @@ func SetLogLevel(lvl Level) {
 
 func GetLogLevel() Level {
 	return log_option.Level
+}
+
+func Close() {
+	for _, wc := range log_option.files {
+		if wc != nil {
+			wc.Close()
+		}
+	}
 }

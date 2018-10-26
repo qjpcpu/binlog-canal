@@ -2,8 +2,7 @@ package config
 
 import (
 	"errors"
-	"github.com/qjpcpu/binlog-canal/plugins/data-plugin"
-	"github.com/qjpcpu/binlog-canal/plugins/position-plugin"
+	"github.com/qjpcpu/binlog-canal/plugins"
 	"strings"
 )
 
@@ -48,11 +47,6 @@ type SourceConfig struct {
 	SyncAll bool
 }
 
-type Plugins struct {
-	Position positionplugin.Store
-	Data     dataplugin.Receiver
-}
-
 type ServerConfig struct {
 	SourceConfig SourceConfig
 }
@@ -87,15 +81,8 @@ func New(mysqlConn string, db_name string, tables ...string) ServerConfig {
 	}
 }
 
-func DefaultPlugins() Plugins {
-	return PluginsOnlyForDebug()
-}
-
-func PluginsOnlyForDebug() Plugins {
-	return Plugins{
-		Position: positionplugin.MemStore{},
-		Data:     dataplugin.Stdout{},
-	}
+func PluginsOnlyForDebug() *plugins.Plugins {
+	return plugins.New()
 }
 
 func (cfg *SourceConfig) ParseDSN() error {

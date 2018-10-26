@@ -9,6 +9,18 @@
 			"revisionTime": "2017-06-26T11:06:00Z"
 		},
 		{
+			"checksumSHA1": "2UmMbNHc8FBr98mJFN1k8ISOIHk=",
+			"path": "github.com/garyburd/redigo/internal",
+			"revision": "e8e59ed1cd89662b75af5d1109e39e5dc148cc00",
+			"revisionTime": "2018-03-20T13:09:17Z"
+		},
+		{
+			"checksumSHA1": "3kM5bMyfqvdCfgQdOb01CR1aA74=",
+			"path": "github.com/garyburd/redigo/redis",
+			"revision": "e8e59ed1cd89662b75af5d1109e39e5dc148cc00",
+			"revisionTime": "2018-03-20T13:09:17Z"
+		},
+		{
 			"checksumSHA1": "rdTivBqdcOd2Z5jJOiyOPZ/mfmw=",
 			"origin": "github.com/siddontang/go-mysql/vendor/github.com/juju/errors",
 			"path": "github.com/juju/errors",
@@ -34,52 +46,82 @@
 			"revisionTime": "2017-09-05T21:21:22Z"
 		},
 		{
-			"checksumSHA1": "ZUJqKTzOFKqmow+tY0GXv7XSt9w=",
+			"checksumSHA1": "jYdsPxNWFZ6sEG/iGKvkDKOCPGk=",
 			"path": "github.com/qjpcpu/binlog-canal/config",
-			"revision": "6eb57f83279fc5edf3dc2dbbb0b6763203a52f32",
-			"revisionTime": "2018-07-30T06:49:54Z"
+			"revision": "a2a9b444d5908a7046042dc6004e58ab7f16aa0f",
+			"revisionTime": "2018-08-15T02:15:02Z"
+		},
+		{
+			"checksumSHA1": "HYIMzlTjLmckCz9joZiMPNRb6iQ=",
+			"path": "github.com/qjpcpu/binlog-canal/plugins",
+			"revision": "a2a9b444d5908a7046042dc6004e58ab7f16aa0f",
+			"revisionTime": "2018-08-15T02:15:02Z"
 		},
 		{
 			"checksumSHA1": "G4ZlkpdvhRrDuLnxVlvoShgIDbU=",
 			"path": "github.com/qjpcpu/binlog-canal/plugins/data-plugin",
-			"revision": "eba5dabd376f248c5126375a1d4bd1da56a5fa9c",
-			"revisionTime": "2018-07-27T02:22:12Z"
+			"revision": "a2a9b444d5908a7046042dc6004e58ab7f16aa0f",
+			"revisionTime": "2018-08-15T02:15:02Z"
 		},
 		{
-			"checksumSHA1": "cnaWmeAMt+pBHJTPMCljXTIjFPk=",
+			"checksumSHA1": "Etjo4DM1TTTt6ams4LOVsFwEcZU=",
 			"path": "github.com/qjpcpu/binlog-canal/plugins/position-plugin",
-			"revision": "eba5dabd376f248c5126375a1d4bd1da56a5fa9c",
-			"revisionTime": "2018-07-27T02:22:12Z"
+			"revision": "a2a9b444d5908a7046042dc6004e58ab7f16aa0f",
+			"revisionTime": "2018-08-15T02:15:02Z"
 		},
 		{
 			"checksumSHA1": "lqyy9uW7PCuNwl/fTvSbHLvmdBY=",
 			"path": "github.com/qjpcpu/binlog-canal/protocol",
-			"revision": "eba5dabd376f248c5126375a1d4bd1da56a5fa9c",
-			"revisionTime": "2018-07-27T02:22:12Z"
+			"revision": "a2a9b444d5908a7046042dc6004e58ab7f16aa0f",
+			"revisionTime": "2018-08-15T02:15:02Z"
 		},
 		{
-			"checksumSHA1": "JJHaH8gtzyhHBX3XRltckreAqKc=",
+			"checksumSHA1": "sSyxmkQs6JMC86rBF5E7VPa3DX4=",
 			"path": "github.com/qjpcpu/binlog-canal/sync",
-			"revision": "eba5dabd376f248c5126375a1d4bd1da56a5fa9c",
-			"revisionTime": "2018-07-27T02:22:12Z"
+			"revision": "a2a9b444d5908a7046042dc6004e58ab7f16aa0f",
+			"revisionTime": "2018-08-15T02:15:02Z"
 		},
 		{
 			"checksumSHA1": "2Uay6kaWgNMJ1ernaXPWfGvKpIU=",
 			"path": "github.com/qjpcpu/binlog-canal/utils",
-			"revision": "eba5dabd376f248c5126375a1d4bd1da56a5fa9c",
-			"revisionTime": "2018-07-27T02:22:12Z"
+			"revision": "a2a9b444d5908a7046042dc6004e58ab7f16aa0f",
+			"revisionTime": "2018-08-15T02:15:02Z"
 		},
 		{
-			"checksumSHA1": "/stb6FRXnlElhcP1hq8XIZwYpI4=",
+			"checksumSHA1": "kieBZO28kGY/N6QgNILNcOHGEiA=",
+			"path": "github.com/qjpcpu/common/redisutil",
+			"revision": "3d8cb28d0a3d09be51af11c3af5248d4c16597a6",
+			"revisionTime": "2018-10-24T07:57:51Z"
+		},
+		{
+			"checksumSHA1": "s070ma5cPFeM0mM5GcI86gQ5ixU=",
+			"path": "github.com/qjpcpu/filelog",
+			"revision": "0f399aa2e59bc09f85067bb8861e6e2fdc4c9859",
+			"revisionTime": "2018-10-22T02:03:27Z"
+		},
+		{
+			"checksumSHA1": "XaMxfEMEBldLM5QbD2OXHRhCnGs=",
+			"path": "github.com/qjpcpu/filelog/diode",
+			"revision": "0f399aa2e59bc09f85067bb8861e6e2fdc4c9859",
+			"revisionTime": "2018-10-22T02:03:27Z"
+		},
+		{
+			"checksumSHA1": "HYmY21IE8wNcdQcidP6DG6yUDEA=",
+			"path": "github.com/qjpcpu/filelog/diode/internal/diodes",
+			"revision": "0f399aa2e59bc09f85067bb8861e6e2fdc4c9859",
+			"revisionTime": "2018-10-22T02:03:27Z"
+		},
+		{
+			"checksumSHA1": "v/8IucJNAvRER5mudKETh2WXZnE=",
 			"path": "github.com/qjpcpu/log",
-			"revision": "50575d429a68d522b1baa9de120367be4a5c28aa",
-			"revisionTime": "2018-05-02T02:42:59Z"
+			"revision": "8c17ed86c7296294e818f236f092f3a7221ac028",
+			"revisionTime": "2018-09-21T09:48:56Z"
 		},
 		{
-			"checksumSHA1": "n3HFY5b9KUMmAuvLws6P79rostw=",
+			"checksumSHA1": "OeGBYMu7KQHvXhDI7BnBMJD9VGc=",
 			"path": "github.com/qjpcpu/log/logging",
-			"revision": "50575d429a68d522b1baa9de120367be4a5c28aa",
-			"revisionTime": "2018-05-02T02:42:59Z"
+			"revision": "8c17ed86c7296294e818f236f092f3a7221ac028",
+			"revisionTime": "2018-09-21T09:48:56Z"
 		},
 		{
 			"checksumSHA1": "RT1EWxdnME3K/uuU4gX0YLeBtlc=",
@@ -153,8 +195,8 @@
 		{
 			"checksumSHA1": "GtamqiJoL7PGHsN454AoffBFMa8=",
 			"path": "golang.org/x/net/context",
-			"revision": "a680a1efc54dd51c040b3b5ce4939ea3cf2ea0d1",
-			"revisionTime": "2018-07-19T17:54:20Z"
+			"revision": "8a410e7b638dca158bf9e766925842f6651ff828",
+			"revisionTime": "2018-08-25T16:15:26Z"
 		},
 		{
 			"checksumSHA1": "nVR6NuI7YAnvjdQuBx/G3tD/dR0=",
@@ -183,6 +225,12 @@
 			"path": "gopkg.in/birkirb/loggers.v1/mappers/stdlib",
 			"revision": "535abe8f2eba8d1edaf1fecacea288ebb3b479ad",
 			"revisionTime": "2018-07-25T02:44:49Z"
+		},
+		{
+			"checksumSHA1": "skSPSmzg+vfeVlePztLzUdZH7sA=",
+			"path": "gopkg.in/redsync.v1",
+			"revision": "98dabdf1c8574561bf976911c14ff652c47b1ddf",
+			"revisionTime": "2016-06-17T03:24:05Z"
 		}
 	],
 	"rootPath": "github.com/qjpcpu/binlog-canal/cmd/printer"
