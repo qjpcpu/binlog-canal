@@ -1,11 +1,8 @@
 package positionplugin
 
 import (
-	"errors"
 	"github.com/qjpcpu/common/redisutil"
 	"github.com/siddontang/go-mysql/mysql"
-	"strconv"
-	"strings"
 )
 
 type RedisStore struct {
@@ -19,8 +16,7 @@ func NewRedisPosition(addr, db, pwd, key string) *RedisStore {
 
 func (f *RedisStore) Save(pos mysql.Position) error {
 	conn := f.pool.Get()
-	val := strconv.FormatUint(uint64(pos.Pos), 10) + " " + pos.Name
-	_, err := conn.Do("SET", f.key, val)
+	_, err := conn.Do("SET", f.key, PositionToString(pos))
 	conn.Close()
 	return err
 }
@@ -28,20 +24,9 @@ func (f *RedisStore) Save(pos mysql.Position) error {
 func (f *RedisStore) Load() (mysql.Position, error) {
 	conn := f.pool.Get()
 	defer conn.Close()
-	pos := mysql.Position{}
 	val, err := redisutil.String(conn.Do("GET", f.key))
 	if err != nil {
-		return pos, err
+		return mysql.Position{}, err
 	}
-	if val == "" {
-		return pos, errors.New("no positon found")
-	}
-	arr := strings.SplitN(val, " ", 2)
-	i, err := strconv.ParseUint(arr[0], 10, 32)
-	if err != nil {
-		return pos, err
-	}
-	pos.Pos = uint32(i)
-	pos.Name = arr[1]
-	return pos, nil
+	return PositionFromString(val)
 }
